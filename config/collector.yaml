@@ -1,0 +1,24 @@
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+processors:
+  batch: {}
+  transform:
+    metric_statements:
+      - context: datapoint
+        statements:
+          - set(attributes["service.name"], resource.attributes["service.name"])
+exporters:
+  prometheus:
+    endpoint: 0.0.0.0:8889
+    translation_strategy: UnderscoreEscapingWithSuffixes
+    resource_to_telemetry_conversion:
+      enabled: false
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [transform, batch]
+      exporters: [prometheus]

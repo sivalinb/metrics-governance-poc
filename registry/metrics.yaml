@@ -1,0 +1,169 @@
+{
+  "groups": [
+    {
+      "id": "metric.demo.operation.count",
+      "type": "metric",
+      "metric_name": "demo.operation.count",
+      "brief": "Completed operations, including failures.",
+      "instrument": "counter",
+      "unit": "{operation}",
+      "stability": "development",
+      "attributes": [
+        {
+          "id": "demo.operation",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.operation bounded dimension.",
+          "examples": [
+            "checkout",
+            "payment"
+          ],
+          "requirement_level": "required"
+        },
+        {
+          "id": "demo.outcome",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.outcome bounded dimension.",
+          "examples": [
+            "success",
+            "failure"
+          ],
+          "requirement_level": "required"
+        }
+      ]
+    },
+    {
+      "id": "metric.demo.operation.duration",
+      "type": "metric",
+      "metric_name": "demo.operation.duration",
+      "brief": "Elapsed time of completed operations.",
+      "instrument": "histogram",
+      "unit": "s",
+      "stability": "development",
+      "attributes": [
+        {
+          "id": "demo.operation",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.operation bounded dimension.",
+          "examples": [
+            "checkout",
+            "payment"
+          ],
+          "requirement_level": "required"
+        },
+        {
+          "id": "demo.outcome",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.outcome bounded dimension.",
+          "examples": [
+            "success",
+            "failure"
+          ],
+          "requirement_level": "required"
+        }
+      ]
+    },
+    {
+      "id": "metric.demo.operation.errors",
+      "type": "metric",
+      "metric_name": "demo.operation.errors",
+      "brief": "Failed operations only; a subset of completed operations.",
+      "instrument": "counter",
+      "unit": "{error}",
+      "stability": "development",
+      "attributes": [
+        {
+          "id": "demo.operation",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.operation bounded dimension.",
+          "examples": [
+            "checkout",
+            "payment"
+          ],
+          "requirement_level": "required"
+        },
+        {
+          "id": "demo.outcome",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.outcome bounded dimension.",
+          "examples": [
+            "success",
+            "failure"
+          ],
+          "requirement_level": "required"
+        }
+      ]
+    },
+    {
+      "id": "metric.demo.order.count",
+      "type": "metric",
+      "metric_name": "demo.order.count",
+      "brief": "Orders successfully accepted during an operation.",
+      "instrument": "counter",
+      "unit": "{order}",
+      "stability": "development",
+      "attributes": [
+        {
+          "id": "demo.operation",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.operation bounded dimension.",
+          "examples": [
+            "checkout",
+            "payment"
+          ],
+          "requirement_level": "required"
+        },
+        {
+          "id": "demo.outcome",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.outcome bounded dimension.",
+          "examples": [
+            "success",
+            "failure"
+          ],
+          "requirement_level": "required"
+        }
+      ]
+    },
+    {
+      "id": "metric.demo.order.value",
+      "type": "metric",
+      "metric_name": "demo.order.value",
+      "brief": "Value of accepted orders in US dollars.",
+      "instrument": "histogram",
+      "unit": "USD",
+      "stability": "development",
+      "attributes": [
+        {
+          "id": "demo.operation",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.operation bounded dimension.",
+          "examples": [
+            "checkout",
+            "payment"
+          ],
+          "requirement_level": "required"
+        },
+        {
+          "id": "demo.outcome",
+          "type": "string",
+          "stability": "development",
+          "brief": "demo.outcome bounded dimension.",
+          "examples": [
+            "success",
+            "failure"
+          ],
+          "requirement_level": "required"
+        }
+      ]
+    }
+  ]
+}

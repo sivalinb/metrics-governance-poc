@@ -1,0 +1,52 @@
+name: Metrics governance
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m governance.check
+      - run: python -m governance.generate --check
+      - run: bash scripts/install-weaver.sh
+      - run: .tools/weaver registry check -r registry
+      - run: python -m pytest -q
+      - run: python -m demo.emit
+      - run: python -m governance.check --telemetry build/telemetry.json
+      - run: python -m governance.weaver_samples build/telemetry.json build/weaver-samples.json
+      - run: .tools/weaver registry live-check -r registry --input-source build/weaver-samples.json --input-format json --format json --output build/weaver-live
+      - name: Prove intentional violations are rejected
+        shell: bash
+        run: |
+          set -euo pipefail
+          for violation in unit attribute; do
+            python -m demo.emit --violation "$violation" --output "build/$violation.json"
+            if python -m governance.check --telemetry "build/$violation.json"; then
+              echo "ERROR: invalid telemetry was accepted"
+              exit 1
+            fi
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: telemetry-captures
+          path: build/
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up --build -d
+      - run: python3 scripts/smoke.py
+      - if: always()
+        run: docker compose logs --no-color
+      - if: always()
+        run: docker compose down

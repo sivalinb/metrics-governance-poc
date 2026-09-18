@@ -1,0 +1,111 @@
+{
+  "version": "1.0.0",
+  "namespace": "demo",
+  "required_resources": [
+    "service.name",
+    "service.version",
+    "deployment.environment.name"
+  ],
+  "metrics": [
+    {
+      "name": "demo.operation.count",
+      "instrument": "counter",
+      "unit": "{operation}",
+      "description": "Completed operations, including failures.",
+      "owner": "demo-platform",
+      "stability": "development",
+      "attributes": {
+        "demo.operation": [
+          "checkout",
+          "payment"
+        ],
+        "demo.outcome": [
+          "success",
+          "failure"
+        ]
+      },
+      "max_attribute_combinations": 4,
+      "deprecation_policy": "Announce replacement and support both names for at least 30 days before removal."
+    },
+    {
+      "name": "demo.operation.duration",
+      "instrument": "histogram",
+      "unit": "s",
+      "description": "Elapsed time of completed operations.",
+      "owner": "demo-platform",
+      "stability": "development",
+      "attributes": {
+        "demo.operation": [
+          "checkout",
+          "payment"
+        ],
+        "demo.outcome": [
+          "success",
+          "failure"
+        ]
+      },
+      "max_attribute_combinations": 4,
+      "deprecation_policy": "Announce replacement and support both names for at least 30 days before removal."
+    },
+    {
+      "name": "demo.operation.errors",
+      "instrument": "counter",
+      "unit": "{error}",
+      "description": "Failed operations only; a subset of completed operations.",
+      "owner": "demo-platform",
+      "stability": "development",
+      "attributes": {
+        "demo.operation": [
+          "checkout",
+          "payment"
+        ],
+        "demo.outcome": [
+          "success",
+          "failure"
+        ]
+      },
+      "max_attribute_combinations": 4,
+      "deprecation_policy": "Announce replacement and support both names for at least 30 days before removal."
+    },
+    {
+      "name": "demo.order.count",
+      "instrument": "counter",
+      "unit": "{order}",
+      "description": "Orders successfully accepted during an operation.",
+      "owner": "demo-platform",
+      "stability": "development",
+      "attributes": {
+        "demo.operation": [
+          "checkout",
+          "payment"
+        ],
+        "demo.outcome": [
+          "success",
+          "failure"
+        ]
+      },
+      "max_attribute_combinations": 4,
+      "deprecation_policy": "Announce replacement and support both names for at least 30 days before removal."
+    },
+    {
+      "name": "demo.order.value",
+      "instrument": "histogram",
+      "unit": "USD",
+      "description": "Value of accepted orders in US dollars.",
+      "owner": "demo-platform",
+      "stability": "development",
+      "attributes": {
+        "demo.operation": [
+          "checkout",
+          "payment"
+        ],
+        "demo.outcome": [
+          "success",
+          "failure"
+        ]
+      },
+      "max_attribute_combinations": 4,
+      "deprecation_policy": "Announce replacement and support both names for at least 30 days before removal."
+    }
+  ]
+}
