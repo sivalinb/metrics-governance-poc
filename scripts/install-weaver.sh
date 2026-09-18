@@ -2,7 +2,7 @@
 set -euo pipefail
 version=0.19.0
 case "$(uname -s)-$(uname -m)" in
-  Linux-x86_64) target=x86_64-unknown-linux-musl ;;
+  Linux-x86_64) target=x86_64-unknown-linux-gnu ;;
   Darwin-arm64) target=aarch64-apple-darwin ;;
   *) echo "Install Weaver v$version manually for your platform" >&2; exit 1 ;;
 esac

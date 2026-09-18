@@ -14,7 +14,7 @@ Local tests used Python 3.9.6 on Apple Silicon. Its system LibreSSL produces an 
 
 ## Container verification
 
-Docker is unavailable on the authoring machine. Compose execution is therefore delegated to the included GitHub Actions `integration` job, which builds the demo, starts Collector and Prometheus, and polls the real Prometheus query API until translated counters from both services are present. Check the repository Actions run for the remote result.
+Docker is unavailable on the authoring machine. The GitHub Actions integration test successfully built and ran the demo, Collector, and Prometheus, and verified translated operation counters for both services through the real Prometheus API. The first governance run exposed an incorrect Linux Weaver archive suffix; the installer was corrected to use the official `x86_64-unknown-linux-gnu` release asset. See repository Actions for the latest complete run.
 
 The smoke test checks connectivity, translation of the operation counter, and service identity. It does not exhaustively test all metric translations, histogram bucket behavior, restart handling, or production load.
 
